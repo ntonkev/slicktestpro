@@ -9,12 +9,20 @@ import play.api.db._
 import play.api.db.DB
 import play.api.Play.current
 
-import models.{Language, DAO}
+import models.current.dao._
 
 object Global extends GlobalSettings {
 
   override def onStart(app: Application) {
     lazy val database = Database.forDataSource(DB.getDataSource())
+
+    val query = for (l <- Languages) yield l.name
+
+    val result = database.withSession {
+      session =>
+        query.list()( session )
+    }
+
   }
 
 }

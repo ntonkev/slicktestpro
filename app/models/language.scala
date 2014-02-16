@@ -11,7 +11,7 @@ case class Language(id: Int, name: String, description: String, code: String)
 trait LanguageComponent { this: Profile =>
   import profile.simple._
 
-  class Languages(tag: Tag) extends Table[Language](tag,"dict.Language") {
+  class Languages(tag: Tag) extends Table[Language](tag,"language") {
     def id = column[Int]("languageid",O.PrimaryKey)
     def name = column[String]("name",O.NotNull)
     def description = column[String]("description",O.Nullable)
